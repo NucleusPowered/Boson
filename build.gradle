@@ -1,0 +1,71 @@
+plugins {
+    id 'idea'
+    id 'eclipse'
+    id 'com.github.hierynomus.license' version '0.12.1'
+    id 'ninja.miserable.blossom' version '1.0.1'
+    id 'maven'
+    id 'com.github.johnrengelman.shadow' version '1.2.3'
+    id 'java'
+    // id "com.qixalite.spongestart" version "1.4.3"
+}
+
+project.ext.versionno = '1.0.0'
+project.ext.minecraftversion = '1.12.2'
+project.ext.spongeapiversion = '7.0'
+project.ext.nucleusapi = '1.2.0-PR2-S7.0'
+project.ext.suffix = '-SNAPSHOT'
+group = pluginGroup
+version = pluginVersion
+
+description = 'The Ultimate Essentials Plugin.'
+ext.url = 'http://nucleuspowered.org'
+
+group 'io.github.nucleuspowered'
+
+ext.spongeapi = '7.0.0-SNAPSHOT'
+
+defaultTasks 'licenseFormat build'
+
+repositories {
+    jcenter()
+    maven {
+        name 'Sponge maven repo'
+        url 'http://repo.spongepowered.org/maven'
+    }
+    maven {
+        name 'drnaylor-minecraft'
+        url 'http://repo.drnaylor.co.uk/artifactory/list/minecraft'
+    }
+    maven {
+        name 'drnaylor'
+        url 'http://repo.drnaylor.co.uk/artifactory/list/quickstart'
+    }
+    maven {
+        url 'https://jitpack.io'
+    }
+}
+
+dependencies {
+    compile "io.github.nucleuspowered:nucleus-api:" + project.ext.nucleusapi
+    compile "org.spongepowered:spongeapi:" + project.ext.spongeapi
+
+}
+
+license {
+    ext.name = project.name
+
+    exclude "**/*.info"
+    exclude "assets/**"
+    exclude "*.properties"
+    exclude "*.txt"
+
+    header file('HEADER.txt')
+    sourceSets = project.sourceSets
+
+    ignoreFailures false
+    strictCheck true
+
+    mapping {
+        java = 'SLASHSTAR_STYLE'
+    }
+}
